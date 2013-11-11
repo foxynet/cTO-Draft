@@ -41,7 +41,10 @@ if(-Not (Get-ADGroup -Filter {SamAccountName -eq $groupIdentity}) )
 	Exit 1
 }
 
-$creds = Get-Credential
+$username = "c_oc_f_memldap"
+$password = cat C:\code\pw\$username.txt | convertto-securestring
+
+$creds = new-object -typename System.Management.Automation.PSCredential -argumentlist "VMWAREM\$username", $password
 
 # Find members in Group
  
